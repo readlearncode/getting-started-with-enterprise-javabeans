@@ -11,12 +11,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Book implements Serializable {
 
     public static final String FIND_ALL = "Book.findAll";
-    private static final float VAT_RATE = 5.5f;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
+
     @Version
     @Column(name = "version")
     private int version;
@@ -36,9 +36,6 @@ public class Book implements Serializable {
 
     @Column(length = 13)
     private Float price;
-
-    @Transient
-    private Float vat;
 
     @Column
     private String author;
@@ -133,10 +130,6 @@ public class Book implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
-        if (price != null) {
-            vat = price * VAT_RATE / 100;
-        }
-
     }
 
     public String getAuthor() {
@@ -145,10 +138,6 @@ public class Book implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public Float getVat() {
-        return vat;
     }
 
     @Override

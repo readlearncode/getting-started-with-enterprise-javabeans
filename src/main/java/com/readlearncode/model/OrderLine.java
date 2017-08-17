@@ -1,19 +1,13 @@
 package com.readlearncode.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "items")
-public class Item implements Serializable {
+@XmlRootElement
+public class OrderLine implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
@@ -22,11 +16,11 @@ public class Item implements Serializable {
 	@Column(name = "version")
 	private int version;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column
+	private Integer quantity;
 
-	@Column(name = "description", nullable = false)
-	private String description;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Book book;
 
 	public Long getId() {
 		return this.id;
@@ -49,10 +43,10 @@ public class Item implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Item)) {
+		if (!(obj instanceof OrderLine)) {
 			return false;
 		}
-		Item other = (Item) obj;
+		OrderLine other = (OrderLine) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -69,29 +63,31 @@ public class Item implements Serializable {
 		return result;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
-	public String getDescription() {
-		return description;
+	public Book getBook() {
+		return book;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
-		if (name != null && !name.trim().isEmpty())
-			result += "name: " + name;
-		if (description != null && !description.trim().isEmpty())
-			result += ", description: " + description;
+		if (quantity != null)
+			result += "quantity: " + quantity;
 		return result;
+	}
+
+	public void newBook() {
+		this.book = new Book();
 	}
 }

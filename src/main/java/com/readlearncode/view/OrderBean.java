@@ -1,8 +1,6 @@
 package com.readlearncode.view;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.readlearncode.model.Order;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -23,8 +21,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import com.readlearncode.model.Order;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Backing bean for Order entities.
@@ -73,11 +72,11 @@ public class OrderBean implements Serializable {
 	@PersistenceContext(unitName = "getting-started-with-enterprise-javabeans-persistence-unit", type = PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 
-	public String create() {
+	public void create() {
 
 		this.conversation.begin();
 		this.conversation.setTimeout(1800000L);
-		return "create?faces-redirect=true";
+		// return "create?faces-redirect=true";
 	}
 
 	public void retrieve() {

@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,15 +32,27 @@ public class OrderService implements Serializable {
         return entityManager.find(Order.class, id);
     }
 
-    public void save(Order order) {
-        order.setCreationDate(new Date());
+    public Order save(Order order) {
+        order.setCreationDate(new Date()); // TODO: remove or change this
         for (OrderLine orderLine : order.getOrderLines()) {
             Book book = bookService.find(orderLine.getBook().getId());
             orderLine.setBook(book);
             entityManager.persist(orderLine);
         }
+        order.setTotalOrder(calculateOrderTotal(order));
         entityManager.persist(order);
+        return order;
     }
 
+    public Order initializeOrder() {
+        return save(new Order(new ArrayList<>()));
+    }
 
+    private Float calculateOrderTotal(Order order) {
+        Float orderTotal = 0f;
+        for (OrderLine orderLine : order.getOrderLines()) {
+            orderTotal = orderTotal + (orderLine.getQuantity() * orderLine.getBook().getPrice());
+        }
+        return orderTotal;
+    }
 }

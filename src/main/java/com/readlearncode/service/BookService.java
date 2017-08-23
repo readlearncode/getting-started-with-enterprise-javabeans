@@ -57,7 +57,6 @@ public class BookService implements Serializable {
 
     public List<Book> searchBooks(Book book) {
 
-
         CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Book> criteria = builder.createQuery(Book.class);
@@ -65,7 +64,6 @@ public class BookService implements Serializable {
         TypedQuery<Book> query = this.entityManager.createQuery(criteria
                 .select(root).where(getSearchPredicates(root, book)));
         return query.getResultList();
-
 
     }
 

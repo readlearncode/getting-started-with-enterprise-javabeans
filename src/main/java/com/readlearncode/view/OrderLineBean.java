@@ -1,10 +1,11 @@
 package com.readlearncode.view;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.readlearncode.model.Book;
+import com.readlearncode.model.OrderLine;
+import com.readlearncode.service.BookService;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
 import javax.enterprise.context.Conversation;
@@ -23,8 +24,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import com.readlearncode.model.OrderLine;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Backing bean for OrderLine entities.
@@ -46,6 +48,10 @@ public class OrderLineBean implements Serializable {
 	/*
 	 * Support creating and retrieving OrderLine entities
 	 */
+
+
+	@EJB
+    private BookService bookService;
 
 	private Long id;
 
@@ -107,11 +113,18 @@ public class OrderLineBean implements Serializable {
 	 * Support updating and deleting OrderLine entities
 	 */
 
+	public String add(Book book ) {
+
+		return "search?faces-redirect=true";
+	}
+
 	public String update() {
 		this.conversation.end();
 
 		try {
 			if (this.id == null) {
+                Book book = bookService.find(orderLine.getBook().getId()); // reattach the book
+                orderLine.setBook(book);
 				this.entityManager.persist(this.orderLine);
 				return "search?faces-redirect=true";
 			} else {

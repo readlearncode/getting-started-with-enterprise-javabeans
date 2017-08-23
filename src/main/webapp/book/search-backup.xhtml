@@ -11,8 +11,11 @@
         <f:viewParam name="page" value='#{bookBean.page}'/>
         <f:event type="preRenderView" listener='#{bookBean.paginate}'/>
 
-        <f:viewParam name="OrderId" value='#{cartBean.id}'/>
-        <f:event type="preRenderView" listener='#{cartBean.retrieve}'/>
+        <f:viewParam name="orderLineId" value='#{orderLineBean.id}'/>
+        <f:event type="preRenderView" listener='#{orderLineBean.retrieve}'/>
+
+        <f:viewParam name="OrderId" value='#{orderBean.id}'/>
+        <f:event type="preRenderView" listener='#{orderBean.retrieve}'/>
 
     </f:metadata>
 
@@ -29,6 +32,44 @@
     <ui:define name="footer"/>
 
     <ui:define name="main">
+        <h:panelGrid columnClasses="label,component,required" columns="3">
+            <h:outputLabel for="orderBeanOrderOrderLines" value="Order Lines:"/>
+            <h:dataTable id="orderBeanOrderOrderLines" styleClass="data-table" value="#{orderBean.order.orderLines}" var="_item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quantity"/>
+                    </f:facet>
+                    <h:link outcome="/orderLine/view">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="_itemQuantity" value="#{_item.quantity}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name"/>
+                    </f:facet>
+                    <h:link outcome="/orderLine/view">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="_itemBookName" value="#{_item.book.name}"/>
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+            <h:outputText/>
+            <h:outputLabel for="orderBeanOrderTotalOrder" value="Total Order:"/>
+            <h:outputText id="orderBeanOrderTotalOrder" value="#{orderBean.order.totalOrder}"/>
+            <h:outputText/>
+            <h:outputLabel for="orderBeanOrderName" value="Name:"/>
+            <h:outputText id="orderBeanOrderName" value="#{orderBean.order.name}"/>
+            <h:outputText/>
+            <h:outputLabel for="orderBeanOrderAddress" value="Address:"/>
+            <h:outputText id="orderBeanOrderAddress" value="#{orderBean.order.address}"/>
+            <h:outputText/>
+            <h:outputLabel for="orderBeanOrderCreationDate" value="Creation Date:"/>
+            <h:outputText id="orderBeanOrderCreationDate" value="#{orderBean.order.creationDate}">
+                <f:convertDateTime/>
+            </h:outputText>
+            <h:outputText/>
+        </h:panelGrid>
 
         <h:form id="search">
             <f:validateBean disabled="true">
@@ -48,37 +89,6 @@
 
                 </h:panelGroup>
             </f:validateBean>
-
-
-            <h:panelGrid columnClasses="label,component,required" columns="3">
-                <h:outputLabel for="orderBeanOrderOrderLines" value="Order Lines:"/>
-                <h:dataTable id="orderBeanOrderOrderLines" styleClass="data-table" value="#{cartBean.orderLines}"
-                             var="_item">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Quantity"/>
-                        </f:facet>
-                        <h:link outcome="/orderLine/view">
-                            <f:param name="id" value="#{_item.id}"/>
-                            <h:outputText id="_itemQuantity" value="#{_item.quantity}"/>
-                        </h:link>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Name"/>
-                        </f:facet>
-                        <h:link outcome="/orderLine/view">
-                            <f:param name="id" value="#{_item.id}"/>
-                            <h:outputText id="_itemBookName" value="#{_item.book.name}"/>
-                        </h:link>
-                    </h:column>
-                </h:dataTable>
-                <h:outputText/>
-                <h:outputLabel for="orderBeanOrderTotalOrder" value="Total Order:"/>
-                <h:outputText id="orderBeanOrderTotalOrder" value="#{cartBean.totalOrder}"/>
-                <h:outputText/>
-            </h:panelGrid>
-
 
             <h:dataTable id="bookBeanPageItems" styleClass="data-table" value="#{bookBean.pageItems}" var="_item">
                 <h:column>
@@ -127,21 +137,15 @@
 
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Quantity"/>
-                    </f:facet>
-                    <h:selectOneMenu style="width: 50px;" value="#{cartBean.quantity}">
-                        <f:selectItem itemValue="1" itemLabel = "1"/>
-                        <f:selectItem itemValue="2" itemLabel = "2"/>
-                        <f:selectItem itemValue="3" itemLabel = "3"/>
-                        <f:selectItem itemValue="4" itemLabel = "4"/>
-                    </h:selectOneMenu>
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">
                         <h:outputText value="Buy"/>
                     </f:facet>
-                    <h:commandButton value="Add to Cart" action="#{cartBean.add(_item)}"/>
+                    <h:commandButton value="Add to Cart" action="#{orderLineBean.update()}">
+                        <!--<h:commandLink action="#{orderLineBean.add(_item)}" styleClass="remove-buttontton"/>-->
+                        <!--<c:set value="1" target="#{orderLineBean.orderLine.id}" property="device" />-->
+                        <!--<c:set value="#{_item}" target="#{orderLineBean.orderLine.book}" property="device" />-->
+                        <f:setPropertyActionListener target="#{orderLineBean.orderLine.quantity}" value="1"/>
+                        <f:setPropertyActionListener target="#{orderLineBean.orderLine.book}" value="#{_item}"/>
+                    </h:commandButton>
                 </h:column>
 
             </h:dataTable>

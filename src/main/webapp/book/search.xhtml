@@ -130,7 +130,7 @@
 
                 <h:link outcome="/order/view">
                     <f:param name="id" value="#{cartBean.id}"/>
-                    <h:outputText id="_checkout"  value="Proceed to checkout"/>
+                    <h:outputText id="_checkout" value="Proceed to checkout"/>
                 </h:link>
 
             </h:panelGrid>
@@ -197,7 +197,11 @@
                     <f:facet name="header">
                         <h:outputText value="Buy"/>
                     </f:facet>
-                    <h:commandButton value="Add to Cart" action="#{cartBean.add(_item)}"/>
+                    <h:commandButton value="Add to Cart" action="#{cartBean.add}">
+                        <f:setPropertyActionListener target="#{cartBean.book}" value="#{_item}"/>
+                        <f:setPropertyActionListener target="#{cartBean.quantity}" value="#{cartBean.quantity}"/>
+                    </h:commandButton>
+
                 </h:column>
 
             </h:dataTable>

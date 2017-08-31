@@ -56,7 +56,7 @@ public class CartBean implements Serializable {
     private Book book;
     private List<OrderLine> orderLines;
     private Float totalOrder;
-    private Integer quantity = 1;
+    private Integer quantity;
     private Long id;
 
     public Long getId() {
@@ -129,16 +129,26 @@ public class CartBean implements Serializable {
     }
 
     public String add(Book book) {
+        shoppingCart.addBook(book, 1);
+        return "search?faces-redirect=true";
+    }
+
+    public String add(Book book, Integer quantity) {
         shoppingCart.addBook(book, quantity);
         return "search?faces-redirect=true";
     }
 
-    public String remove(Book book){
+    public String add() {
+        shoppingCart.addBook(book, quantity);
+        return "search?faces-redirect=true";
+    }
+
+    public String remove(Book book) {
         shoppingCart.removeBook(book);
         return "search?faces-redirect=true";
     }
 
-    public String removeAll(Book book){
+    public String removeAll(Book book) {
         shoppingCart.removeBookAll(book);
         return "search?faces-redirect=true";
     }
@@ -198,13 +208,13 @@ public class CartBean implements Serializable {
         String name = this.shoppingCart.getOrder().getName();
         if (name != null && !"".equals(name)) {
             predicatesList.add(builder.like(
-                    builder.lower(root.<String> get("name")),
+                    builder.lower(root.<String>get("name")),
                     '%' + name.toLowerCase() + '%'));
         }
         String address = this.shoppingCart.getOrder().getAddress();
         if (address != null && !"".equals(address)) {
             predicatesList.add(builder.like(
-                    builder.lower(root.<String> get("address")),
+                    builder.lower(root.<String>get("address")),
                     '%' + address.toLowerCase() + '%'));
         }
 
@@ -220,7 +230,7 @@ public class CartBean implements Serializable {
     }
 
 	/*
-	 * Support listing and POSTing back Order entities (e.g. from inside an
+     * Support listing and POSTing back Order entities (e.g. from inside an
 	 * HtmlSelectOneMenu)
 	 */
 
@@ -231,7 +241,6 @@ public class CartBean implements Serializable {
         return this.entityManager.createQuery(
                 criteria.select(criteria.from(Order.class))).getResultList();
     }
-
 
 
     public Converter getConverter() {

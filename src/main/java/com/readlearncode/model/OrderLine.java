@@ -52,7 +52,7 @@ public class OrderLine implements Serializable {
 	}
 
 	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+		this.quantity = quantity < 0 ? 0 : quantity;
 	}
 
 	public Book getBook() {

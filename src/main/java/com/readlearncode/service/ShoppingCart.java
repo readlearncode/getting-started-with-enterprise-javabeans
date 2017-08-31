@@ -6,6 +6,7 @@ import com.readlearncode.model.OrderLine;
 
 import javax.ejb.Stateful;
 import javax.inject.Inject;
+import java.util.Optional;
 
 /**
  * Source code github.com/readlearncode
@@ -54,11 +55,26 @@ public class ShoppingCart {
             order.getOrderLines().add(new OrderLine(book, quantity));
         }
 
-        save(this.order);
+        save(order);
     }
 
+    public void removeBook(Book book) {
+        order = orderService.find(order.getId()); //reattach order
+        Optional<OrderLine> orderLine = order.getOrderLines().stream().filter(ol -> ol.getBook().equals(book)).findFirst();
+        orderLine.ifPresent(ol -> ol.setQuantity(ol.getQuantity()-1));
+        save(order);
+    }
+
+    public void removeBookAll(Book book) {
+        order = orderService.find(order.getId()); //reattach order
+        Optional<OrderLine> orderLine = order.getOrderLines().stream().filter(ol -> ol.getBook().equals(book)).findFirst();
+        order.getOrderLines().remove(orderLine.get());
+        save(order);
+    }
 
     public Order getOrder() {
         return order;
     }
+
+
 }

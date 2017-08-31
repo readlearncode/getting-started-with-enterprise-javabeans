@@ -31,10 +31,10 @@ public class DatabaseInitialiser {
     @PostConstruct
     public void populateDatabase(){
 
-        Book book1 = new Book(isbnGenerator.generateISBN(), "Java EE by Example", "A book about Java EE", "cover/java-ee.jpg", 35.00f, "Alex Theedom");
+        Book book1 = new Book(isbnGenerator.generateISBN(), "Java EE by Example", "A book about Java EE", "placeholder-cover.jpg", 35.00f, "Alex Theedom");
         bookService.save(book1);
 
-        Book book2 = new Book(isbnGenerator.generateISBN(), "JAX-RS and RESTful APIs", "A book about JAX-RS", "cover/jaz-rs.jpg", 15.00f, "Alex Theedom");
+        Book book2 = new Book(isbnGenerator.generateISBN(), "JAX-RS and RESTful APIs", "A book about JAX-RS", "placeholder-cover.jpg", 15.00f, "Alex Theedom");
         bookService.save(book2);
 
     }

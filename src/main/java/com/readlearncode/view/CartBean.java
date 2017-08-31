@@ -56,7 +56,7 @@ public class CartBean implements Serializable {
     private Book book;
     private List<OrderLine> orderLines;
     private Float totalOrder;
-    private Integer quantity = 0;
+    private Integer quantity = 1;
     private Long id;
 
     public Long getId() {
@@ -130,6 +130,16 @@ public class CartBean implements Serializable {
 
     public String add(Book book) {
         shoppingCart.addBook(book, quantity);
+        return "search?faces-redirect=true";
+    }
+
+    public String remove(Book book){
+        shoppingCart.removeBook(book);
+        return "search?faces-redirect=true";
+    }
+
+    public String removeAll(Book book){
+        shoppingCart.removeBookAll(book);
         return "search?faces-redirect=true";
     }
 

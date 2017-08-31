@@ -106,6 +106,17 @@
                         <h:outputText id="_itemPrice" value="#{_item.price}"/>
                     </h:link>
                 </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modify"/>
+                    </f:facet>
+                    <h:link outcome="/book/create" styleClass="btn btn-primary">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="_itemEdit" value="Edit/Delete"/>
+                    </h:link>
+                </h:column>
+
             </h:dataTable>
             <ui:include src="/resources/scaffold/paginator.xhtml">
                 <ui:param name="paginatorBean" value='#{bookBean}'/>

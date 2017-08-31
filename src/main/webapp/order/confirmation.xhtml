@@ -14,11 +14,11 @@
 	<ui:param name="pageTitle" value="Shopping Cart"/>
 
 	<ui:define name="header">
-		Shopping Cart
+		Checkout
 	</ui:define>
 
 	<ui:define name="subheader">
-		View your items
+		Your order has been placed
 	</ui:define>
 
 	<ui:define name="footer"/>
@@ -58,21 +58,9 @@
 				</h:column>
 
 			</h:dataTable>
-			<h:outputText/>
-			<h:outputLabel for="orderBeanOrderTotalOrder" value="Total Order:"/>
-			<h:outputText id="orderBeanOrderTotalOrder" value="#{orderBean.order.totalOrder}"/>
-			<h:outputText/>
+
 		</h:panelGrid>
-
-		<!--<div class="buttons">-->
-			<!--<h:link value="Place your order" outcome="order/confirmation" styleClass="btn btn-primary"/>-->
-		<!--</div>-->
-
-        <h:link outcome="/order/confirmation">
-            <f:param name="id" value="#{orderBean.id}"/>
-            <h:outputText id="_checkout"  value="Proceed to checkout"/>
-        </h:link>
-
+		
 	</ui:define>
 
 </ui:composition>

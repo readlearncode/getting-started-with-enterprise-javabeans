@@ -77,13 +77,15 @@
 				<h:commandLink value="Save" action='#{bookBean.update}' styleClass="btn btn-primary"/>
 				<c:choose>
 					<c:when test='#{!empty bookBean.id}'>
-						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
-							<f:param name="id" value='#{bookBean.id}'/>
-						</h:link>
+						<!--<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">-->
+							<!--<f:param name="id" value='#{bookBean.id}'/>-->
+						<!--</h:link>-->
+						<h:link value="Cancel" outcome="admin-search" styleClass="btn btn-primary"/>
+
 						<h:commandLink value="Delete" action='#{bookBean.delete}' styleClass="btn btn-primary"/>
 					</c:when>
 					<c:otherwise>
-						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+						<h:link value="Cancel" outcome="admin-search" styleClass="btn btn-primary"/>
 					</c:otherwise>
 				</c:choose>
 			</div>

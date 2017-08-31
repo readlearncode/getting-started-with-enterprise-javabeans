@@ -15,36 +15,52 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<h:link id="brandLink" outcome="/index.xhtml" styleClass="brand">
-					<h:outputText value="Welcome to " rendered=" #{request.userPrincipal !=null} "/>
-                    Getting-started-with-enterprise-javabeans
-                    <h:outputText value=",  #{request.userPrincipal.name}" rendered="#{request.userPrincipal !=null} "/>
-				</h:link>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li><a href="http://forge.jboss.org/document/hands-on-lab">How to Customize</a></li>
-					</ul>
+
+
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row shadowme">
+
+						<div class="ui-grid-col-5">
+							&#160;&#160;
+							<a href="#{request.contextPath}" style="text-decoration: none;color:white;">
+								<h:graphicImage value='#{resource["duke.gif"]}' border="0" style="padding-top: 10px;" height="30"/>&#160;&#160;
+								<h:outputText styleClass="titleText" value="Duke's Book Store"/>
+								<h:outputText style="font-size:.85em" value=" - Powered by Java Enterprize Edition 7"/>
+							</a></div>
+
+						<div class="ui-grid-col-2" style="padding-top: 8px; position: absolute; right: 0;">
+							<h:form>
+								<h:outputLink target="_blank"
+											  value="https://github.com/readlearncode">
+									<h:graphicImage value='#{resource["github.png"]}' border="0" />
+								</h:outputLink>
+								<h:outputLink target="_blank" value="https://uk.linkedin.com/in/alextheedom">
+									<h:graphicImage value='#{resource["linkedin.png"]}' border="0" />
+								</h:outputLink>
+								<h:outputLink target="_blank" value="https://twitter.com/readlearncode">
+									<h:graphicImage value='#{resource["twitter.png"]}' border="0" />
+								</h:outputLink>
+								<h:outputLink target="_blank" value="https://www.readlearncode.com">
+									<h:graphicImage value='#{resource["wordpress.png"]}' border="0" />
+								</h:outputLink>
+							</h:form>
+						</div>
+						&#160;&#160;
+					</div>
 				</div>
+
+
+
+
+
+
 			</div>
 		</div>
 	</div>
 
 	<div class="container forgecontainer">
 		<div id="navigation">
-			<h:link id="homeLink" outcome="/index.xhtml">
-				<h:graphicImage value='#{resource["forge-logo.png"]}' alt="Forge... get hammered" border="0" />	
-			</h:link>
-			<ul>
-				<li>
-					<h:link outcome="/book/search" value="Book"/>
-				</li>
-				<li>
-					<h:link outcome="/order/search" value="Order"/>
-				</li>
-				<li>
-					<h:link outcome="/orderLine/search" value="Order Line"/>
-				</li>
-			</ul>
+				<h:graphicImage width="195px" height="198px" value='#{resource["tree.png"]}' alt="Black Forest Bookshop" border="0" />
 		</div>
 
 		<div id="content">
@@ -61,7 +77,7 @@
 
 	<footer>
 		<div id="footer-wrapper">
-	    	<p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+	    	<p>Powered by <a href="https://www.readlearncode.com">readlearncode.com</a></p>
 	    </div>
 	</footer>
 

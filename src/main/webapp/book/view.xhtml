@@ -1,30 +1,35 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/resources/scaffold/pageTemplate.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/scaffold/pageTemplate.xhtml">
 
-	<f:metadata>
-		<f:viewParam name="id" value='#{bookBean.id}'/>
-		<f:event type="preRenderView" listener='#{bookBean.retrieve}'/>
-	</f:metadata>
+    <f:metadata>
+        <f:viewParam name="id" value='#{bookBean.id}'/>
+        <f:event type="preRenderView" listener='#{bookBean.retrieve}'/>
+    </f:metadata>
 
-	<ui:param name="pageTitle" value="View Book"/>
+    <ui:param name="pageTitle" value="View Book"/>
 
-	<ui:define name="header">
-		Book
-	</ui:define>
+    <ui:define name="header">
+        Book
+    </ui:define>
 
-	<ui:define name="subheader">
-		View existing Book
-	</ui:define>
+    <ui:define name="subheader">
+        #{bookBean.book.name}
+    </ui:define>
 
-	<ui:define name="footer"/>
+    <ui:define name="footer"/>
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<f:facet name="header">
+                <ui:param name="path" value="/covers/#{bookBean.book.pictureURL}" />
+                <h:graphicImage width="86" height="138" value='#{resource[path]}' border="0"/>
+			</f:facet>
 			<h:outputLabel for="bookBeanBookIsbn" value="Isbn:"/>
 			<h:outputText id="bookBeanBookIsbn" value="#{bookBean.book.isbn}"/>
 			<h:outputText/>
@@ -42,11 +47,9 @@
 			<h:outputText/>
 		</h:panelGrid>
 
-		<div class="buttons">
-			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
-			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
-			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
-		</div>
-	</ui:define>
+        <div class="buttons">
+            <h:commandButton value="Back" onclick="window.history.back();"/>
+        </div>
+    </ui:define>
 
 </ui:composition>

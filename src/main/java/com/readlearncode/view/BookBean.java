@@ -1,8 +1,6 @@
 package com.readlearncode.view;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.readlearncode.model.Book;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -23,8 +21,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import com.readlearncode.model.Book;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Backing bean for Book entities.
@@ -113,10 +112,10 @@ public class BookBean implements Serializable {
 		try {
 			if (this.id == null) {
 				this.entityManager.persist(this.book);
-				return "search?faces-redirect=true";
+				return "admin-search?faces-redirect=true";
 			} else {
 				this.entityManager.merge(this.book);
-				return "view?faces-redirect=true&id=" + this.book.getId();
+				return "admin-search?faces-redirect=true&id=" + this.book.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -133,7 +132,7 @@ public class BookBean implements Serializable {
 
 			this.entityManager.remove(deletableEntity);
 			this.entityManager.flush();
-			return "search?faces-redirect=true";
+			return "admin-search?faces-redirect=true";
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));

@@ -62,6 +62,7 @@ public class ShoppingCart {
         order = orderService.find(order.getId()); //reattach order
         Optional<OrderLine> orderLine = order.getOrderLines().stream().filter(ol -> ol.getBook().equals(book)).findFirst();
         orderLine.ifPresent(ol -> ol.setQuantity(ol.getQuantity()-1));
+        order.getOrderLines().removeIf(ol -> ol.getQuantity() == 0);
         save(order);
     }
 

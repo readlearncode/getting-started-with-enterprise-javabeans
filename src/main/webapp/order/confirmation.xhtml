@@ -25,7 +25,7 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="orderBeanOrderOrderLines" value="Order Lines:"/>
+			<h:outputLabel for="orderBeanOrderOrderLines" value="Shopping Cart"/>
 			<h:dataTable id="orderBeanOrderOrderLines" styleClass="data-table" value="#{orderBean.order.orderLines}" var="_item">
 				<h:column>
 					<f:facet name="header">
@@ -53,12 +53,20 @@
 					</f:facet>
 					<h:link outcome="/orderLine/view">
 						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemTotal" value="#{_item.book.price * _item.quantity}"/>
+						<h:outputText id="_itemTotal" value="#{_item.book.price * _item.quantity}">
+						<f:convertNumber currencySymbol="$" type="currency"/>
+						</h:outputText>
+
 					</h:link>
 				</h:column>
 
 			</h:dataTable>
-
+			<h:outputText/>
+			<h:outputLabel for="orderBeanOrderTotalOrder" value="Total Order"/>
+			<h:outputText id="orderBeanOrderTotalOrder" value="#{orderBean.order.totalOrder}">
+				<f:convertNumber currencySymbol="$" type="currency"/>
+			</h:outputText>
+			<h:outputText/>
 		</h:panelGrid>
 		
 	</ui:define>

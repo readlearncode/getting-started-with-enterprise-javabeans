@@ -1,78 +1,83 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/resources/scaffold/pageTemplate.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/scaffold/pageTemplate.xhtml">
 
-	<f:metadata>
-		<f:viewParam name="id" value='#{orderBean.id}'/>
-		<f:event type="preRenderView" listener='#{orderBean.retrieve}'/>
-	</f:metadata>
+    <f:metadata>
+        <f:viewParam name="id" value='#{orderBean.id}'/>
+        <f:event type="preRenderView" listener='#{orderBean.retrieve}'/>
+    </f:metadata>
 
-	<ui:param name="pageTitle" value="Shopping Cart"/>
+    <ui:param name="pageTitle" value="Shopping Cart"/>
 
-	<ui:define name="header">
-		Shopping Cart
-	</ui:define>
+    <ui:define name="header">
+        Shopping Cart
+    </ui:define>
 
-	<ui:define name="subheader">
-		View your items
-	</ui:define>
+    <ui:define name="subheader">
+        View your items
+    </ui:define>
 
-	<ui:define name="footer"/>
+    <ui:define name="footer"/>
 
-	<ui:define name="main">
-		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="orderBeanOrderOrderLines" value="Order Lines:"/>
-			<h:dataTable id="orderBeanOrderOrderLines" styleClass="data-table" value="#{orderBean.order.orderLines}" var="_item">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Quantity"/>
-					</f:facet>
-					<h:link outcome="/orderLine/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemQuantity" value="#{_item.quantity}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Name"/>
-					</f:facet>
-					<h:link outcome="/orderLine/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemBookName" value="#{_item.book.name}"/>
-					</h:link>
-				</h:column>
+    <ui:define name="main">
+        <h:panelGrid columnClasses="label,component,required" columns="3">
+            <h:outputLabel for="orderBeanOrderOrderLines" value="Order Lines"/>
+            <h:dataTable id="orderBeanOrderOrderLines" styleClass="data-table" value="#{orderBean.order.orderLines}"
+                         var="_item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quantity"/>
+                    </f:facet>
+                    <h:link outcome="/orderLine/view">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="_itemQuantity" value="#{_item.quantity}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name"/>
+                    </f:facet>
+                    <h:link outcome="/orderLine/view">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="_itemBookName" value="#{_item.book.name}"/>
+                    </h:link>
+                </h:column>
 
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Total"/>
+                    </f:facet>
+                    <h:link outcome="/orderLine/view">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="_itemTotal" value="#{_item.book.price * _item.quantity}">
+                            <f:convertNumber currencySymbol="$" type="currency"/>
+                        </h:outputText>
+                    </h:link>
+                </h:column>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Total"/>
-					</f:facet>
-					<h:link outcome="/orderLine/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemTotal" value="#{_item.book.price * _item.quantity}"/>
-					</h:link>
-				</h:column>
+            </h:dataTable>
+            <h:outputText/>
+            <h:outputLabel for="orderBeanOrderTotalOrder" value="Total Order"/>
+            <h:outputText id="orderBeanOrderTotalOrder" value="#{orderBean.order.totalOrder}">
+                <f:convertNumber currencySymbol="$" type="currency"/>
+            </h:outputText>
+            <h:outputText/>
+        </h:panelGrid>
 
-			</h:dataTable>
-			<h:outputText/>
-			<h:outputLabel for="orderBeanOrderTotalOrder" value="Total Order:"/>
-			<h:outputText id="orderBeanOrderTotalOrder" value="#{orderBean.order.totalOrder}"/>
-			<h:outputText/>
-		</h:panelGrid>
+        <!--<div class="buttons">-->
+        <!--<h:link value="Place your order" outcome="order/confirmation" styleClass="btn btn-primary"/>-->
+        <!--</div>-->
 
-		<!--<div class="buttons">-->
-			<!--<h:link value="Place your order" outcome="order/confirmation" styleClass="btn btn-primary"/>-->
-		<!--</div>-->
-
-        <h:link outcome="/order/confirmation">
+        <h:link outcome="/order/confirmation" styleClass="btn btn-primary">
             <f:param name="id" value="#{orderBean.id}"/>
-            <h:outputText id="_checkout"  value="Proceed to checkout"/>
+            <h:outputText id="_checkout" value="Confirm Order"/>
         </h:link>
 
-	</ui:define>
+    </ui:define>
 
 </ui:composition>

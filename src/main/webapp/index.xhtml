@@ -1,29 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-				xmlns:h="http://java.sun.com/jsf/html"
-	template="/resources/scaffold/pageTemplate.xhtml">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/resources/scaffold/pageTemplate.xhtml">
 
-	<ui:param name="pageTitle" value="Black Forest Bookshop" />
+    <ui:param name="pageTitle" value="Black Forest Bookshop"/>
 
-	<ui:define name="header">
-		Welcome
-	</ui:define>
+    <ui:define name="header">
+        Black Forest Book Shop
+    </ui:define>
 
-	<ui:define name="main">
-		<h2 class="success">
-			Your bookshop online.
-		</h2>
-		<p>
-
-			<h:link outcome="/book/search" value="Customer"/>
-
-			<br/>
-
-			<h:link outcome="/book/admin-search" value="Admin"/>
-
-		</p>
-	</ui:define>
+    <ui:define name="main">
+        <h2 class="success">
+            Getting Started With Enterprise JavaBeans
+        </h2>
+        <p>
+            <h:panelGrid style="width: 100%" columns="2">
+                <h:panelGroup style="display:block;">
+                    <h:link outcome="/book/search" value="Customer Access" style="text-align: center"
+                            styleClass="btn btn-primary"/>
+                </h:panelGroup>
+                <h:panelGroup style="display:block;">
+                    <h:link outcome="/book/admin-search" value="Admin Access" tyle="text-align: center"
+                            styleClass="btn btn-primary"/>
+                </h:panelGroup>
+            </h:panelGrid>
+        </p>
+    </ui:define>
 
 </ui:composition>

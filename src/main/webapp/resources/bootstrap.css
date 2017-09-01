@@ -4517,13 +4517,19 @@ a.thumbnail:hover {
   vertical-align: baseline;
   background-color: #999999;
 }
-
+.right{
+    text-align: right;
+}
 .label {
   padding: 1px 4px 2px;
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
           border-radius: 3px;
 }
+.right{
+    text-align: right;
+}
+
 
 .badge {
   padding: 1px 9px 2px;

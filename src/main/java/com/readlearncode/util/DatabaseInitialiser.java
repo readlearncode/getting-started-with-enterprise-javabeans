@@ -37,6 +37,15 @@ public class DatabaseInitialiser {
         Book book2 = new Book(isbnGenerator.generateISBN(), "JAX-RS and REST", "A book about JAX-RS", "placeholder-cover.jpg", 15.00f, "Alex Theedom");
         bookService.save(book2);
 
+        Book book3 = new Book(isbnGenerator.generateISBN(), "Fun with EJBs", "Alex presents 'Fun with EJBs'", "placeholder-cover.jpg", 22.00f, "Alex Theedom");
+        bookService.save(book3);
+
+        Book book4 = new Book(isbnGenerator.generateISBN(), "Java EE 8", "Learn the wonders of Java EE 8", "placeholder-cover.jpg", 29.99f, "Alex Theedom");
+        bookService.save(book4);
+
+//        Book book5 = new Book(isbnGenerator.generateISBN(), "Java 101", "A introduction to Java", "placeholder-cover.jpg", 10.00f, "Alex Theedom");
+//        bookService.save(book5);
+
     }
 
 

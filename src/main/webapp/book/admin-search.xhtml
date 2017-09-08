@@ -103,7 +103,9 @@
                     </f:facet>
                     <h:link outcome="/book/view">
                         <f:param name="id" value="#{_item.id}"/>
-                        <h:outputText id="_itemPrice" value="#{_item.price}"/>
+                        <h:outputText id="_itemPrice" value="#{_item.price}">
+                            <f:convertNumber currencySymbol="$" type="currency"/>
+                        </h:outputText>
                     </h:link>
                 </h:column>
 

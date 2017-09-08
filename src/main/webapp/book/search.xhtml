@@ -83,7 +83,9 @@
                         </f:facet>
                         <h:link outcome="/orderLine/view">
                             <f:param name="id" value="#{_item.id}"/>
-                            <h:outputText id="_itemBookPrice" value="#{_item.book.price}"/>
+                            <h:outputText id="_itemBookPrice" value="#{_item.book.price}">
+                                <f:convertNumber currencySymbol="$" type="currency"/>
+                            </h:outputText>
                         </h:link>
                     </h:column>
                     <h:column>
@@ -174,7 +176,9 @@
                     </f:facet>
                     <h:link outcome="/book/view">
                         <f:param name="id" value="#{_item.id}"/>
-                        <h:outputText id="_itemPrice" value="#{_item.price}"/>
+                        <h:outputText id="_itemPrice" value="#{_item.price}">
+                            <f:convertNumber currencySymbol="$" type="currency"/>
+                        </h:outputText>
                     </h:link>
                 </h:column>
 

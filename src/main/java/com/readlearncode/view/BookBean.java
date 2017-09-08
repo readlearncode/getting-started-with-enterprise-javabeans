@@ -135,7 +135,7 @@ public class BookBean implements Serializable {
 			return "admin-search?faces-redirect=true";
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("You cannot delete a Book in a shopping cart or has been purchased."));
+					new FacesMessage("You cannot delete a Book that is in a shopping cart or that has been purchased."));
 			return null;
 		}
 	}

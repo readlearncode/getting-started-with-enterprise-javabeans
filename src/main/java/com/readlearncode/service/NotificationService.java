@@ -29,10 +29,10 @@ public class NotificationService {
     public void initialize() {
         notificationEvents.add(new NotificationEvent("Sale Now On!", "25% discount on Java books"));
         notificationEvents.add(new NotificationEvent("Black Friday Deals", "1000's discounts on books"));
-        notificationEvents.add(new NotificationEvent("clearance Sale", "Everything must go!"));
+        notificationEvents.add(new NotificationEvent("Clearance Sale", "Everything must go!"));
     }
 
-    @Schedule(second = "*/5", minute = "*", hour = "*", persistent = false)
+    @Schedule(second = "*/30", minute = "*", hour = "*", persistent = false)
     public void doWork() {
         events.fire(notificationEvents.get(new Random().nextInt(notificationEvents.size())));
     }

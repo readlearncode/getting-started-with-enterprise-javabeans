@@ -8,4 +8,6 @@ They need:
 * The site lacks a shopping cart, a rather important component for an online business. So, your task is to choose the best way to implement this feature.
 * A bean that performs the basic CRUD functionality required to manage books in the bookshop application.   Once you have completed this functionality you will be well on your way to a fully functioning bookshop application.
 
+To launch the application:
+* From the command line type: mvn package cargo:run
 

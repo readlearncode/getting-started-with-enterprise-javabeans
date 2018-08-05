@@ -9,5 +9,5 @@ They need:
 * A bean that performs the basic CRUD functionality required to manage books in the bookshop application.   Once you have completed this functionality you will be well on your way to a fully functioning bookshop application.
 
 To launch the application:
-* From the command line type: mvn package cargo:run
+* From the command line type: _mvn package cargo:run_
 

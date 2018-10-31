@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "myOrder")
 @NamedQueries({@NamedQuery(name = Order.FIND_ALL, query = "SELECT o FROM Order o")})
-@XmlRootElement
 public class Order implements Serializable {
 
 	public static final String FIND_ALL = "Order.findAll";

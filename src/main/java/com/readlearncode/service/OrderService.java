@@ -5,22 +5,22 @@ import com.readlearncode.model.Book;
 import com.readlearncode.model.Order;
 import com.readlearncode.model.OrderLine;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class OrderService implements Serializable {
+public class OrderService {
 
     @Inject
     private EntityManager entityManager;
 
-    @Inject
+    @EJB
     private BookService bookService;
 
     public List<Order> findAll() {
@@ -33,7 +33,7 @@ public class OrderService implements Serializable {
     }
 
     public Order save(Order order) {
-        order.setCreationDate(new Date()); // TODO: remove or change this
+        order.setCreationDate(new Date());
         for (OrderLine orderLine : order.getOrderLines()) {
             Book book = bookService.find(orderLine.getBook().getId());
             orderLine.setBook(book);

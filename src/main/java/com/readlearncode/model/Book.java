@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({@NamedQuery(name = Book.FIND_ALL, query = "SELECT b FROM Book b")})
-@XmlRootElement
 public class Book implements Serializable {
 
     public static final String FIND_ALL = "Book.findAll";

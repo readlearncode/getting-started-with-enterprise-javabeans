@@ -69,6 +69,7 @@ public class BookBean implements Serializable {
 	@Inject
 	private Conversation conversation;
 
+	// TODO: inject the BookService EJB and use that instead
 	@PersistenceContext(unitName = "getting-started-with-enterprise-javabeans-persistence-unit", type = PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 
@@ -175,6 +176,7 @@ public class BookBean implements Serializable {
 		return null;
 	}
 
+	// TODO: extract out to BookService EJB
 	public void paginate() {
 
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();

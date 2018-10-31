@@ -2,8 +2,10 @@ package com.readlearncode.service;
 
 
 import com.readlearncode.generator.ISBNGenerator;
+import com.readlearncode.generator.qualifier.ISBN10;
 import com.readlearncode.model.Book;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -12,17 +14,17 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Stateless
-public class BookService implements Serializable {
+@Local
+@Stateless(name = "BookShopService")
+public class BookService {
 
     @Inject
     private EntityManager entityManager;
 
-    @Inject
+    @Inject @ISBN10
     private ISBNGenerator isbnGenerator;
 
 
